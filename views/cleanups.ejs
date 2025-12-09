@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+<section class="content">
+  <div class="section-header">
+    <h1>Your logged cleanups</h1>
+    <a class="button" href="/cleanups/new">+ New cleanup</a>
+  </div>
+  <%- include('partials/flash') %>
+  <% if (!cleanups.length) { %>
+    <p>No cleanups yet. Start by logging your first litter pickup.</p>
+  <% } else { %>
+    <div class="cards">
+      <% cleanups.forEach((cleanup) => { %>
+        <article class="card">
+          <header class="card-header">
+            <div>
+              <div class="muted">Start</div>
+              <strong><%= new Date(cleanup.start_time).toLocaleString() %></strong>
+            </div>
+            <div>
+              <div class="muted">End</div>
+              <strong><%= new Date(cleanup.end_time).toLocaleString() %></strong>
+            </div>
+          </header>
+          <p class="items"><strong>Items:</strong> <%= cleanup.items %></p>
+          <% if (cleanup.location_type === 'gps' && cleanup.latitude && cleanup.longitude) { %>
+            <p class="muted">Location: GPS (<%= cleanup.latitude.toFixed(5) %>, <%= cleanup.longitude.toFixed(5) %>)</p>
+          <% } else if (cleanup.location_type === 'ward' && cleanup.ward) { %>
+            <p class="muted">Location: Ward <%= cleanup.ward %></p>
+          <% } else { %>
+            <p class="muted">Location: not provided</p>
+          <% } %>
+          <% if (cleanup.photo_path) { %>
+            <div class="photo">
+              <a href="<%= cleanup.photo_path %>" target="_blank">
+                <img src="<%= cleanup.photo_path %>" alt="Cleanup photo" />
+              </a>
+            </div>
+          <% } %>
+        </article>
+      <% }); %>
+    </div>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

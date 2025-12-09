@@ -1,0 +1,5 @@
+node_modules
+cleanup.db
+uploads/*
+!uploads/.gitkeep
+.env

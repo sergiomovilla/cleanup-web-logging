@@ -1,0 +1,75 @@
+<%- include('partials/header') %>
+<section class="content">
+  <div class="section-header">
+    <h1>Log a new cleanup</h1>
+    <a class="button ghost" href="/cleanups">Back to list</a>
+  </div>
+  <%- include('partials/flash') %>
+  <form method="post" action="/cleanups" class="card" enctype="multipart/form-data">
+    <label>
+      Items collected
+      <textarea name="items" rows="3" placeholder="Cans, wrappers, bottles" required></textarea>
+    </label>
+
+    <fieldset>
+      <legend>Location (optional)</legend>
+      <label class="inline">
+        <input type="radio" name="locationType" value="gps" />
+        GPS coordinates
+      </label>
+      <div class="location-grid" data-location="gps">
+        <label>
+          Latitude
+          <input type="number" step="any" name="latitude" placeholder="e.g. 51.5007" />
+        </label>
+        <label>
+          Longitude
+          <input type="number" step="any" name="longitude" placeholder="e.g. -0.1246" />
+        </label>
+        <button type="button" class="button small" data-geolocate>Use my location</button>
+      </div>
+
+      <label class="inline">
+        <input type="radio" name="locationType" value="ward" />
+        Select ward
+      </label>
+      <div class="location-grid" data-location="ward">
+        <label>
+          Ward
+          <select name="ward">
+            <option value="">Choose ward</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="East">East</option>
+            <option value="West">West</option>
+            <option value="Central">Central</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="inline">
+        <input type="radio" name="locationType" value="" checked />
+        No location
+      </label>
+    </fieldset>
+
+    <div class="grid">
+      <label>
+        Start time
+        <input type="datetime-local" name="startTime" required />
+      </label>
+      <label>
+        End time
+        <input type="datetime-local" name="endTime" required />
+      </label>
+    </div>
+
+    <label>
+      Photo (optional, single)
+      <input type="file" accept="image/*" name="photo" />
+    </label>
+
+    <button type="submit">Save cleanup</button>
+  </form>
+</section>
+<%- include('partials/footer') %>
