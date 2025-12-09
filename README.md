@@ -26,3 +26,5 @@ Environment options:
 - `SESSION_SECRET`: secret string for session signing (defaults to a development value)
 
 Uploads are saved under `uploads/` and served from `/uploads`.
+
+Built completely by AI
