@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+<section class="auth">
+  <h1>Create account</h1>
+  <%- include('partials/flash') %>
+  <form method="post" action="/register" class="card">
+    <label>
+      Username
+      <input type="text" name="username" required />
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required minlength="6" />
+    </label>
+    <button type="submit">Register</button>
+    <p class="muted">Already registered? <a href="/login">Login here</a>.</p>
+  </form>
+</section>
+<%- include('partials/footer') %>
